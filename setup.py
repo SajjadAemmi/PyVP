@@ -22,24 +22,25 @@ pre_install()
 
 
 setup(
-    name='puzzle15-ai',
-    version='0.1.13',
+    name='pyvp',
+    version='0.1.1',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    packages=["puzzle15_ai"],
+    packages=["pyvp"],
     setup_requires=[
-        'pyside6',
-        'numpy'
+        'scikit-image',
+        'numpy',
+        'matplotlib'
     ],
-    url='https://github.com/SajjadAemmi/Puzzle15-AI',
+    url='https://github.com/SajjadAemmi/PyVP',
     license='',
     author='Sajjad Aemmi',
     author_email='sajjadaemmi@gmail.com',
-    description='Puzzle15 AI solver',
+    description='Vanishing Point Detector',
     include_package_data=True,
-    package_data={"puzzle15_ai": ['main.ui']},
+    package_data={"pyvp": ['main.ui']},
     install_requires=post_install(),
     entry_points={
-        "console_scripts": ["puzzle15-ai=puzzle15_ai.main_window:main"],
+        "console_scripts": [],
     },
 )

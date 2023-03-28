@@ -1,4 +1,4 @@
-from rectification import *
+from pyvp.rectification import *
 
 
 image = io.imread("io/input/2.jpg")
