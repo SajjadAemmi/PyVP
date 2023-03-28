@@ -15,14 +15,14 @@ class VPDetector:
         vps_2d = []
 
         edgelets1 = compute_edgelets(image)
-        vp1_3d = ransac_vanishing_point(edgelets1, num_ransac_iter=self.num_ransac_iter, threshold_inlier=5)
-        vp1_2d = reestimate_model(vp1_3d, edgelets1, threshold_reestimate=5)
+        vp1_3d = ransac_vanishing_point(edgelets1, num_ransac_iter=self.num_ransac_iter, threshold_inlier=self.threshold_inlier)
+        vp1_2d = reestimate_model(vp1_3d, edgelets1, threshold_reestimate=self.threshold_inlier)
         vps_3d.append(vp1_3d)
         vps_2d.append(vp1_2d)
 
         edgelets2 = remove_inliers(vp1_2d, edgelets1, 10)
-        vp2_3d = ransac_vanishing_point(edgelets2, num_ransac_iter=2000, threshold_inlier=5)
-        vp2_2d = reestimate_model(vp2_3d, edgelets2, threshold_reestimate=5)
+        vp2_3d = ransac_vanishing_point(edgelets2, num_ransac_iter=2000, threshold_inlier=self.threshold_inlier)
+        vp2_2d = reestimate_model(vp2_3d, edgelets2, threshold_reestimate=self.threshold_inlier)
         vps_3d.append(vp2_3d)
         vps_2d.append(vp2_2d)
 
@@ -35,17 +35,19 @@ class VPDetector:
         # self.vps_3d, self.vps_2d = VPDetector.rearrange_order(image, self.vps_3d, self.vps_2d)
         return self.vps_3d, self.vps_2d
 
-    def showPoints(self, image):
+    def showPoints(self, image, save=False, path="vps_2d.png"):
         plt.imshow(image)
         colors = ['red', 'green', 'blue']
         for i, vp_2d in enumerate(self.vps_2d):
             plt.scatter(vp_2d[0], vp_2d[1], c=colors[i])
         plt.show()
+        if save:
+            plt.savefig(path, dpi=300)
 
-    def showLines(self, image, save=False):
+    def showLines(self, image):
         # Visualize the vanishing point model
-        vis_model(image, self.vps_2d[0], show=True, save=True, path="vp1.png")
-        vis_model(image, self.vps_2d[1], show=True, save=True, path="vp2.png")
+        vis_model(image, self.vps_2d[0])
+        vis_model(image, self.vps_2d[1])
 
     @staticmethod
     def rearrange_order(image, vps_3d, vps_2d):
