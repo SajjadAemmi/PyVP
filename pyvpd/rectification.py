@@ -444,7 +444,7 @@ def vis_edgelets(image, edgelets, show=True):
         plt.show()
 
 
-def vis_model(image, model, show=True):
+def vis_model(image, model, show=True, save=True, path="temp.png"):
     """Helper function to visualize computed model."""
     import matplotlib.pyplot as plt
     edgelets = compute_edgelets(image)
@@ -464,6 +464,8 @@ def vis_model(image, model, show=True):
     if show:
         plt.show()
 
+    if save:
+        plt.savefig(path, dpi=300)
 
 def rectify_image(image, clip_factor=6, algorithm='independent', 
                   reestimate=False):

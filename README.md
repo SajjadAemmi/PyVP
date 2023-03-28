@@ -8,15 +8,20 @@ of user photos." 2014 IEEE International Conference on Image Processing (ICIP).
 
 Modifcation note: Instead of finding edge direction using structural tensor and its eigenvectors as in paper, I have used more reliable canny edge detection and probabalistic hough line transform.
 
-##  Results
+## Installation
+```
+pip install pyvpd
+```
+
+## Results
 
 Input image:
 
-![Input Image](/results/shelf.jpg)
+![Input Image](./io/output/shelf.jpg)
 
 After rectification:
 
-![Rectified Image](/results/shelf_warped.png)
+![Rectified Image](./io/output/shelf_warped.png)
 
 ## How it works
 
@@ -27,7 +32,7 @@ edgelets1 = compute_edgelets(image)
 vis_edgelets(image, edgelets1) # Visualize the edgelets
 ```
 
-![Edgelets](/results/edgelets.png)
+![Edgelets](./io/output/edgelets.png)
 
 Next, find dominant vanishing point using ransac algorithm. In our case it turns out to be horizontal.
 
@@ -38,7 +43,7 @@ vp1 = reestimate_model(vp1, edgelets1, threshold_reestimate=5)
 vis_model(image, vp1) # Visualize the vanishing point model
 ```
 
-![Horizontal Vanishing Point](/results/horizontal_vp.png)
+![Horizontal Vanishing Point](./io/output/horizontal_vp.png)
 
 Remove the inliers for horizontal vanishing point. Vertical lines should now be dominant. Recompute the vanishing point using ransac should give us vertical vanishing point. 
 
@@ -50,7 +55,7 @@ vp2 = reestimate_model(vp2, edgelets2, threshold_reestimate=5)
 vis_model(image, vp2) # Visualize the vanishing point model
 ```
 
-![Vertical Vanishing Point](/results/vertical_vp.png)
+![Vertical Vanishing Point](./io/output/vertical_vp.png)
 
 Finally, compute homography and warp the image so that we have a fronto parellel view with orthogonal axes: 
 
@@ -59,4 +64,4 @@ warped_img = compute_homography_and_warp(image, vp1, vp2,
                                          clip_factor=clip_factor)
 ```
 
-![Rectified Image](/results/shelf_warped.png)
+![Rectified Image](./io/output/shelf_warped.png)
