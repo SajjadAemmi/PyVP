@@ -22,23 +22,23 @@ pre_install()
 
 
 setup(
-    name='pyvp',
+    name='pyvpd',
     version='0.1.1',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    packages=["pyvp"],
+    packages=["pyvpd"],
     setup_requires=[
         'scikit-image',
         'numpy',
         'matplotlib'
     ],
-    url='https://github.com/SajjadAemmi/PyVP',
+    url='https://github.com/SajjadAemmi/pyvpd',
     license='',
     author='Sajjad Aemmi',
     author_email='sajjadaemmi@gmail.com',
     description='Vanishing Point Detector',
     include_package_data=True,
-    package_data={"pyvp": ['main.ui']},
+    package_data={"pyvpd": []},
     install_requires=post_install(),
     entry_points={
         "console_scripts": [],
