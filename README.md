@@ -1,5 +1,7 @@
 # PyVPD: Vanishing Point Detector
 
+[![Upload Python Package](https://github.com/SajjadAemmi/PyVPD/actions/workflows/python-publish.yml/badge.svg)](https://github.com/SajjadAemmi/PyVPD/actions/workflows/python-publish.yml)
+
 This is a Python + Scikit-Image implementation of the Vanishing point detection in images
 
 ## Installation
